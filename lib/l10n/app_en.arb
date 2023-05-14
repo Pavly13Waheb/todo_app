@@ -1,0 +1,11 @@
+{
+  "language": "Language",
+  "mod" : "Mod",
+  "light" : "Light",
+  "dark" : "Dark",
+  "setting" : "Setting",
+  "todolist" : "ToDo List",
+  "addnewtask" : "Add New Task",
+  "enteryourtask" : "Enter Your Task",
+  "selectedtime" : "Selected Time"
+}

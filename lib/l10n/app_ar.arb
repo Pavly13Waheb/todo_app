@@ -1,0 +1,11 @@
+{
+  "language": "اللغة",
+  "mod" : "النمط",
+  "light" : "مضئ",
+  "dark" : "مظلم",
+  "setting" : "الإعدادات",
+  "todolist" : "قائمة المهام",
+  "addnewtask" : "إضافة مهمه جديدة",
+  "enteryourtask" : "أدخل مهمتك",
+  "selectedtime" : "أختيار الوقت"
+}
