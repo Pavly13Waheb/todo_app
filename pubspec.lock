@@ -183,10 +183,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_native_splash
-      sha256: af665ef80a213a9ed502845a3d7a61b9acca4100ee7e9f067a7440bc3acd6730
+      sha256: "02df24aec455c26428dadc637f20d4c548bda23ee2179479a8e8c39f1ecb75b3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.19"
+    version: "2.3.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -490,6 +490,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  time_picker_spinner_pop_up:
+    dependency: "direct main"
+    description:
+      name: time_picker_spinner_pop_up
+      sha256: cc7b7442b6318cef400c329430955d9203893cf4c55c6e28192240ca5bb8d8a6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   typed_data:
     dependency: transitive
     description:

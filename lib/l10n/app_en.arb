@@ -7,5 +7,8 @@
   "todolist" : "ToDo List",
   "addnewtask" : "Add New Task",
   "enteryourtask" : "Enter Your Task",
-  "selectedtime" : "Selected Time"
+  "taskdescriptions" : "Enter Your Descriptions",
+  "selectedtime" : "Selected Time",
+  "selecteddate" : "Selected Date"
+
 }

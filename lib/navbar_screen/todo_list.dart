@@ -10,7 +10,8 @@ class ToDoList extends StatefulWidget {
 class _ToDoListState extends State<ToDoList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(itemCount: 10,
+    return ListView.builder(
+      itemCount: 10,
       itemBuilder: (context, index) => Container(child: todoWidget(context)),
     );
   }
@@ -18,9 +19,13 @@ class _ToDoListState extends State<ToDoList> {
   todoWidget(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(right: 20, left: 20),
-      margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05,vertical: MediaQuery.of(context).size.height * 0.01),
+      margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.05,
+          vertical: MediaQuery.of(context).size.height * 0.01),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25), color: Colors.white),
+          borderRadius: BorderRadius.circular(25),
+          color: Theme.of(context).colorScheme.background
+      ),
       height: 130,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -56,8 +61,7 @@ class _ToDoListState extends State<ToDoList> {
                         Icon(Icons.watch_later_outlined),
                         Text(
                           "10:30 AM",
-                          style:
-                              TextStyle(fontSize: 12, color: AppColor.secColor),
+                          style: Theme.of(context).textTheme.bodySmall,
                           textAlign: TextAlign.center,
                         )
                       ],

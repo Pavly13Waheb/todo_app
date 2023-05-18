@@ -7,5 +7,7 @@
   "todolist" : "قائمة المهام",
   "addnewtask" : "إضافة مهمه جديدة",
   "enteryourtask" : "أدخل مهمتك",
-  "selectedtime" : "أختيار الوقت"
+  "taskdescriptions" : "وصف المهمة",
+  "selectedtime" : "أختيار الوقت",
+  "selecteddate" : "أختيار التاريخ"
 }
