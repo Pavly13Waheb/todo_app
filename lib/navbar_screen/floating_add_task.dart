@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
+import 'package:todo/tasks_data_class.dart';
 
 class NewTask extends StatefulWidget {
   @override
@@ -23,6 +25,9 @@ class _NewTaskState extends State<NewTask> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: TextFormField(
+              onChanged: (value) {
+                TaskData.task = value;
+              },
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.enteryourtask,
                 labelStyle: TextStyle(color: Colors.grey, fontSize: 20),
@@ -35,6 +40,9 @@ class _NewTaskState extends State<NewTask> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: TextFormField(
+              onChanged: (value) {
+                TaskData.description = value;
+              },
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.taskdescriptions,
                 labelStyle: TextStyle(color: Colors.grey, fontSize: 20),
@@ -81,9 +89,28 @@ class _NewTaskState extends State<NewTask> {
                 // Implement your logic with select dateTime
               },
             ),
+          ),
+          InkWell(
+            child: Text("Save"),
+            onTap: () {
+              adduser();
+            },
           )
         ]),
       ),
     );
+  }
+
+  adduser() {
+    DocumentReference<Map<String, dynamic>> users =
+        FirebaseFirestore.instance.collection('UserTasks').doc();
+
+    return users
+        .set({
+          'Task': TaskData.task, // John Doe
+          'Description': TaskData.description, // Stokes and Sons
+        })
+        .then((value) => print("Task Added"))
+        .catchError((error) => print("Failed to add Task: $error"));
   }
 }

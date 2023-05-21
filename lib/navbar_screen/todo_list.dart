@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/theme/app_color.dart';
 
@@ -11,7 +10,7 @@ class _ToDoListState extends State<ToDoList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 3,
       itemBuilder: (context, index) => Container(child: todoWidget(context)),
     );
   }
@@ -48,6 +47,14 @@ class _ToDoListState extends State<ToDoList> {
                 children: [
                   Text(
                     "Play basket ball",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColor.primColor),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "Description",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

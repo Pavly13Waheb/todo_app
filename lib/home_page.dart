@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/navbar_screen/floating_add_task.dart';
+import 'package:todo/navbar_screen/test.dart';
 import 'package:todo/navbar_screen/todo_list.dart';
 import 'package:todo/theme/app_color.dart';
 import 'navbar_screen/settings_tab.dart';
@@ -13,15 +14,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int navbarpage = 0;
-  List navBarList = [ToDoList(), SettingsTab()];
+  int navbarpage = 1;
+  List navBarList = [ToDoList(), Test(), SettingsTab()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height * 0.2,
-        title: Text( AppLocalizations.of(context)!.todolist,
+        title: Text(
+          AppLocalizations.of(context)!.todolist,
         ),
       ),
       body: Container(
@@ -73,6 +75,12 @@ class _HomePageState extends State<HomePage> {
                   label: "",
                   icon: Icon(
                     Icons.format_list_bulleted,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Test",
+                  icon: Icon(
+                    Icons.face_2_sharp,
                   ),
                 ),
                 BottomNavigationBarItem(
