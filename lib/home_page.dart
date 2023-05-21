@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int navbarpage = 1;
+  int navbarpage = 0;
   List navBarList = [ToDoList(), Test(), SettingsTab()];
 
   @override
