@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:todo/settings_provider.dart';
+import 'package:todo/widgets&model/provider/provider.dart';
 import '../theme/app_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +15,7 @@ class _SettingsTabState extends State<SettingsTab> {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider provider = Provider.of(context);
+    ToDoProvider provider = Provider.of(context);
     String? language = provider.currentLocale;
 
     sharedPrefLanguage() async {
