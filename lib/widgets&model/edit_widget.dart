@@ -1,29 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 import 'package:todo/widgets&model/provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class NewTask extends StatefulWidget {
+class EditWidget extends StatefulWidget {
   @override
-  State<NewTask> createState() => _NewTaskState();
+  State<EditWidget> createState() => _EditWidgetState();
 }
 
-class _NewTaskState extends State<NewTask> {
+class _EditWidgetState extends State<EditWidget> {
   TextEditingController taskController = TextEditingController();
+
   TextEditingController descriptionController = TextEditingController();
+
   DateTime selectedTime = DateTime.now();
+
   late ToDoProvider provider;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of(context);
-
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: SingleChildScrollView(
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -105,7 +106,7 @@ class _NewTaskState extends State<NewTask> {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 onTap: () {
-                  onAddPress();
+                  onEditPress(context);
                 },
               ),
             ),
@@ -115,11 +116,10 @@ class _NewTaskState extends State<NewTask> {
     );
   }
 
-  void onAddPress() {
+  void onEditPress(context) {
     CollectionReference todo = FirebaseFirestore.instance.collection("todo");
     DocumentReference doc = todo.doc();
     doc.update({
-      "id": doc.id,
       "task": taskController.text,
       "description": descriptionController.text,
       "isDone": false,

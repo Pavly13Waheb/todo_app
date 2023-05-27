@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/widgets&model/edit_widget.dart';
+import 'package:todo/widgets&model/provider/provider.dart';
 import 'tasks_data_class.dart';
 import '../theme/app_color.dart';
 
@@ -9,7 +15,39 @@ class ToDoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    ToDoProvider provider = Provider.of(context);
+
+    return SwipeActionCell(
+      key: ObjectKey(ToDoWidget),
+
+      /// this key is necessary
+      leadingActions: <SwipeAction>[
+        SwipeAction(
+            widthSpace: 70,
+            icon: Icon(Icons.delete),
+            onTap: (CompletionHandler handler) async {
+              var todoCollection =
+                  FirebaseFirestore.instance.collection("todo");
+              var doc = todoCollection.doc(todos.id);
+              doc.delete().timeout(Duration(seconds: 1));
+              provider.refreshTodoFromFireStore();
+            },
+            color: Colors.red),
+        SwipeAction(
+          color: Colors.yellow,
+          widthSpace: 70,
+          icon: Icon(Icons.edit),
+          onTap: (CompletionHandler handler) async {
+            handler(false);
+            return showCupertinoModalPopup(
+              context: context,
+              builder: (context) {
+                return EditWidget();
+              },
+            );
+          },
+        )
+      ],
       child: Container(
         padding: EdgeInsets.only(right: 20, left: 20),
         margin: EdgeInsets.symmetric(
@@ -18,7 +56,7 @@ class ToDoWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             color: Theme.of(context).colorScheme.background),
-        height: 130,
+        height: MediaQuery.of(context).size.height * 0.13,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
