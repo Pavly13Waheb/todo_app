@@ -63,15 +63,15 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           height: kBottomNavigationBarHeight * 1.4,
           child: BottomNavigationBar(
-              iconSize: 30,
-              currentIndex: navbarpage,
-              onTap: (int index) {
-                navbarpage = index;
-                setState(() {});
-              },
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  label: "",
+            iconSize: 30,
+            currentIndex: navbarpage,
+            onTap: (int index) {
+              navbarpage = index;
+              setState(() {});
+            },
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                label: "",
                 icon: Icon(
                   Icons.format_list_bulleted,
                 ),

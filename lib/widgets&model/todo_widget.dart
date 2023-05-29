@@ -42,7 +42,11 @@ class ToDoWidget extends StatelessWidget {
             return showCupertinoModalPopup(
               context: context,
               builder: (context) {
-                return EditWidget();
+                return Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: EditWidget());
               },
             );
           },

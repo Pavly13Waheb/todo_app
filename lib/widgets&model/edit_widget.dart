@@ -24,12 +24,14 @@ class _EditWidgetState extends State<EditWidget> {
   Widget build(BuildContext context) {
     provider = Provider.of(context);
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              AppLocalizations.of(context)!.addnewtask,
+              "Edit Task",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
