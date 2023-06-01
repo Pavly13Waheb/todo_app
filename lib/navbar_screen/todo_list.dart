@@ -4,12 +4,7 @@ import 'package:todo/widgets&model/provider/provider.dart';
 import 'package:todo/widgets&model/todo_widget.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
 
-class ToDo extends StatefulWidget {
-  @override
-  State<ToDo> createState() => _ToDoState();
-}
-
-class _ToDoState extends State<ToDo> {
+class ToDo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ToDoProvider provider = Provider.of(context);
@@ -24,7 +19,9 @@ class _ToDoState extends State<ToDo> {
             initialDate: DateTime.now(),
             firstDate: DateTime(2022, 1, 1),
             lastDate: DateTime(2023, 12, 31),
-            onDateSelected: (date) => print(date),
+            onDateSelected: (date) {
+              print(date);
+            },
             leftMargin: 20,
             monthColor: Colors.blueGrey,
             dayColor: Colors.teal[200],

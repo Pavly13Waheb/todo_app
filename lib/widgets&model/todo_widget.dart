@@ -10,7 +10,6 @@ import '../theme/app_color.dart';
 
 class ToDoWidget extends StatelessWidget {
   TaskData todos;
-
   ToDoWidget({required this.todos});
 
   @override
