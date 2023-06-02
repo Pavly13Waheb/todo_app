@@ -8,10 +8,16 @@ import 'package:todo/widgets&model/provider/provider.dart';
 import 'tasks_data_class.dart';
 import '../theme/app_color.dart';
 
-class ToDoWidget extends StatelessWidget {
+class ToDoWidget extends StatefulWidget {
   TaskData todos;
+
   ToDoWidget({required this.todos});
 
+  @override
+  State<ToDoWidget> createState() => _ToDoWidgetState();
+}
+
+class _ToDoWidgetState extends State<ToDoWidget> {
   @override
   Widget build(BuildContext context) {
     ToDoProvider provider = Provider.of(context);
@@ -27,7 +33,7 @@ class ToDoWidget extends StatelessWidget {
             onTap: (CompletionHandler handler) async {
               var todoCollection =
                   FirebaseFirestore.instance.collection("todo");
-              var doc = todoCollection.doc(todos.id);
+              var doc = todoCollection.doc(widget.todos.id);
               doc.delete().timeout(Duration(seconds: 1));
               provider.refreshTodoFromFireStore();
             },
@@ -80,7 +86,7 @@ class ToDoWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      todos.task,
+                      widget.todos.task,
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -88,7 +94,7 @@ class ToDoWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      todos.description,
+                      widget.todos.description,
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -101,7 +107,7 @@ class ToDoWidget extends StatelessWidget {
                         children: [
                           Icon(Icons.watch_later_outlined),
                           Text(
-                            todos.selectedtime.toString(),
+                            widget.todos.selectedtime.toString(),
                             style: Theme.of(context).textTheme.bodySmall,
                             textAlign: TextAlign.center,
                           )
