@@ -38,6 +38,7 @@ class _EditWidgetState extends State<EditWidget> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: taskController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.enteryourtask,
@@ -51,6 +52,7 @@ class _EditWidgetState extends State<EditWidget> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.taskdescriptions,

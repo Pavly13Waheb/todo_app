@@ -11,7 +11,6 @@ class ToDo extends StatelessWidget {
     provider.refreshTodoFromFireStore();
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       body: Column(
         children: [
           CalendarTimeline(

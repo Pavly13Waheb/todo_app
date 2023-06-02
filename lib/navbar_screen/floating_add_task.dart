@@ -35,6 +35,7 @@ class _NewTaskState extends State<NewTask> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: taskController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.enteryourtask,
@@ -48,6 +49,7 @@ class _NewTaskState extends State<NewTask> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.taskdescriptions,
@@ -106,6 +108,8 @@ class _NewTaskState extends State<NewTask> {
                 ),
                 onTap: () {
                   onAddPress();
+                  Navigator.pop(context);
+                  provider.refreshTodoFromFireStore();
                 },
               ),
             ),
@@ -118,7 +122,7 @@ class _NewTaskState extends State<NewTask> {
   void onAddPress() {
     CollectionReference todo = FirebaseFirestore.instance.collection("todo");
     DocumentReference doc = todo.doc();
-    doc.update({
+    doc.set({
       "id": doc.id,
       "task": taskController.text,
       "description": descriptionController.text,
