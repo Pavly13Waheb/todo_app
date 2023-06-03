@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../tasks_data_class.dart';
 
 class ToDoProvider extends ChangeNotifier {
@@ -7,6 +8,20 @@ class ToDoProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
 
   List<TaskData> taskData = [];
+
+  changeLanguage(String lang) async {
+    currentLocale = lang;
+    notifyListeners();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("lang", lang);
+  }
+
+  changeTheme(ThemeMode theme) async {
+    currentTheme = theme;
+    notifyListeners();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("theme", theme == ThemeMode.light ? "light" : "dark");
+  }
 
   refreshTodoFromFireStore() {
     var todoCollection = FirebaseFirestore.instance.collection("todo");

@@ -1,9 +1,9 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/widgets&model/provider/provider.dart';
 import '../theme/app_color.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsTab extends StatefulWidget {
   @override
@@ -11,18 +11,11 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-  var mod;
-
   @override
   Widget build(BuildContext context) {
     ToDoProvider provider = Provider.of(context);
     String? language = provider.currentLocale;
-
-    sharedPrefLanguage() async {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('language', provider.currentLocale);
-      print(prefs);
-    }
+    ThemeMode? mod = provider.currentTheme;
 
     return SingleChildScrollView(
       child: Container(
@@ -42,7 +35,7 @@ class _SettingsTabState extends State<SettingsTab> {
             Container(
               height: 40,
               padding:
-                  EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 5),
+              EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 5),
               margin: EdgeInsets.only(top: 10, bottom: 10),
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -50,41 +43,39 @@ class _SettingsTabState extends State<SettingsTab> {
                   border: Border.all(color: AppColor.secColor)),
               child: DropdownButtonHideUnderline(
                   child: DropdownButton(
-                elevation: 0,
-                alignment: Alignment.center,
-                items: [
-                  DropdownMenuItem(
-                    value: "en",
-                    child: Text("English",
-                        style: TextStyle(
-                            color: AppColor.primColor,
-                            fontWeight: FontWeight.bold)),
-                    onTap: () async {
-                      provider.currentLocale = "en";
-                      provider.notifyListeners();
-                      await sharedPrefLanguage();
+                    elevation: 0,
+                    alignment: Alignment.center,
+                    items: [
+                      DropdownMenuItem(
+                        value: "en",
+                        child: Text("English",
+                            style: TextStyle(
+                                color: AppColor.primColor,
+                                fontWeight: FontWeight.bold)),
+                        onTap: () async {
+                          provider.currentLocale = "en";
+                          provider.notifyListeners();
+                        },
+                      ),
+                      DropdownMenuItem(
+                        value: "ar",
+                        child: Text("العربية",
+                            style: TextStyle(
+                                color: AppColor.primColor,
+                                fontWeight: FontWeight.bold)),
+                        onTap: () async {
+                          provider.currentLocale = "ar";
+                          provider.notifyListeners();
+                        },
+                      )
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        language = value;
+                      });
                     },
-                  ),
-                  DropdownMenuItem(
-                    value: "ar",
-                    child: Text("العربية",
-                        style: TextStyle(
-                            color: AppColor.primColor,
-                            fontWeight: FontWeight.bold)),
-                    onTap: () async {
-                      provider.currentLocale = "ar";
-                      provider.notifyListeners();
-                      await sharedPrefLanguage();
-                    },
-                  )
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    language = value;
-                  });
-                },
-                value: language,
-              )),
+                    value: language,
+                  )),
             ),
             Text(
                 textAlign: TextAlign.start,
@@ -96,7 +87,7 @@ class _SettingsTabState extends State<SettingsTab> {
             Container(
               height: 40,
               padding:
-                  EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 5),
+              EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 5),
               margin: EdgeInsets.only(top: 10, bottom: 10),
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -104,11 +95,11 @@ class _SettingsTabState extends State<SettingsTab> {
                   border: Border.all(color: AppColor.secColor)),
               child: DropdownButtonHideUnderline(
                   child: DropdownButton(
-                elevation: 0,
-                alignment: Alignment.center,
-                items: [
-                  DropdownMenuItem(
-                    value: ThemeMode.light,
+                    elevation: 0,
+                    alignment: Alignment.center,
+                    items: [
+                      DropdownMenuItem(
+                        value: ThemeMode.light,
                     child: Text(AppLocalizations.of(context)!.light,
                         style: TextStyle(
                             color: AppColor.primColor,
@@ -118,25 +109,25 @@ class _SettingsTabState extends State<SettingsTab> {
                       provider.notifyListeners();
                     },
                   ),
-                  DropdownMenuItem(
-                    value: ThemeMode.dark,
-                    child: Text(AppLocalizations.of(context)!.dark,
-                        style: TextStyle(
-                            color: AppColor.primColor,
-                            fontWeight: FontWeight.bold)),
-                    onTap: () {
-                      provider.currentTheme = ThemeMode.dark;
-                      provider.notifyListeners();
+                      DropdownMenuItem(
+                        value: ThemeMode.dark,
+                        child: Text(AppLocalizations.of(context)!.dark,
+                            style: TextStyle(
+                                color: AppColor.primColor,
+                                fontWeight: FontWeight.bold)),
+                        onTap: () {
+                          provider.currentTheme = ThemeMode.dark;
+                          provider.notifyListeners();
+                        },
+                      )
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        mod = value;
+                      });
                     },
-                  )
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    mod = value;
-                  });
-                },
-                value: mod,
-              )),
+                    value: mod,
+                  )),
             ),
           ],
         ),

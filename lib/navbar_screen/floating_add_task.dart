@@ -127,7 +127,7 @@ class _NewTaskState extends State<NewTask> {
       "task": taskController.text,
       "description": descriptionController.text,
       "isDone": false,
-      "time": selectedTime.millisecondsSinceEpoch,
+      "time": selectedTime.microsecondsSinceEpoch,
     }).timeout(
       Duration(seconds: 1),
       onTimeout: () {

@@ -8,6 +8,7 @@ import 'package:todo/widgets&model/provider/provider.dart';
 import 'tasks_data_class.dart';
 import '../theme/app_color.dart';
 
+// ignore: must_be_immutable
 class ToDoWidget extends StatefulWidget {
   TaskData todos;
 
@@ -107,7 +108,8 @@ class _ToDoWidgetState extends State<ToDoWidget> {
                         children: [
                           Icon(Icons.watch_later_outlined),
                           Text(
-                            widget.todos.selectedtime.toString(),
+                            widget.todos.selectedtime.microsecondsSinceEpoch
+                                .toString(),
                             style: Theme.of(context).textTheme.bodySmall,
                             textAlign: TextAlign.center,
                           )
@@ -120,12 +122,20 @@ class _ToDoWidgetState extends State<ToDoWidget> {
             ),
             Expanded(
               flex: 2,
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    color: AppColor.primColor,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Icon(Icons.check, color: Colors.white, size: 50),
+              child: InkWell(
+                onTap: () {},
+                child: widget.todos.isDone
+                    ? Text(
+                        "Done",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )
+                    : Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: AppColor.primColor,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Icon(Icons.check, color: Colors.white, size: 50),
+                      ),
               ),
             ),
           ],
