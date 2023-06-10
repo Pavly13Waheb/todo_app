@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,14 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/widgets&model/provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/theme/app_theme.dart';
+import 'authentication/login.dart';
+import 'authentication/signup.dart';
 import 'widgets&model/firebase_options.dart';
 import 'home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(ChangeNotifierProvider(create: (_) => ToDoProvider(), child: MyApp()));
-  //await FirebaseFirestore.instance.disableNetwork();
 }
 
 class MyApp extends StatefulWidget {
@@ -25,10 +26,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late ToDoProvider provider;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    iniSharedPref();
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    iniSharedPref();
     provider = Provider.of(context);
 
     return MaterialApp(
@@ -50,8 +57,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routes: {
         HomePage.routeName: (_) => HomePage(),
+        SignUp.routeName: (_) => SignUp(),
+        Login.routeName: (_) => Login()
       },
-      initialRoute: HomePage.routeName,
+      initialRoute: Login.routeName,
     );
   }
 

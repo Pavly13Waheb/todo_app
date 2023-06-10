@@ -1,4 +1,6 @@
 class TaskData {
+  static String collectionName = "todo";
+
   String id;
   String task;
   String description;
@@ -9,6 +11,6 @@ class TaskData {
       {required this.id,
       required this.task,
       required this.description,
-      required this.isDone,
-      required this.selectedtime});
+    required this.isDone,
+    required this.selectedtime});
 }

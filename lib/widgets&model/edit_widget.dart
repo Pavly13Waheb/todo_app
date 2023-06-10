@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 import 'package:todo/widgets&model/provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:todo/widgets&model/tasks_data_class.dart';
+
+import '../authentication/UserDmAuth.dart';
 
 class EditWidget extends StatefulWidget {
   @override
@@ -123,7 +126,10 @@ class _EditWidgetState extends State<EditWidget> {
   }
 
   void onEditPress(context) {
-    CollectionReference todo = FirebaseFirestore.instance.collection("todo");
+    CollectionReference todo = FirebaseFirestore.instance
+        .collection(UserDm.collectionName)
+        .doc(UserDm.currentUser!.id)
+        .collection(TaskData.collectionName);
     DocumentReference doc = todo.doc();
     doc.update({
       "task": taskController.text,

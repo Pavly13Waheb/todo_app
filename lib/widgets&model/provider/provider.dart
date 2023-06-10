@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../authentication/UserDmAuth.dart';
 import '../tasks_data_class.dart';
 
 class ToDoProvider extends ChangeNotifier {
@@ -24,7 +25,10 @@ class ToDoProvider extends ChangeNotifier {
   }
 
   refreshTodoFromFireStore() {
-    var todoCollection = FirebaseFirestore.instance.collection("todo");
+    var todoCollection = FirebaseFirestore.instance
+        .collection(UserDm.collectionName)
+        .doc(UserDm.currentUser!.id)
+        .collection(TaskData.collectionName);
     todoCollection.get().then(
       (querySnapShot) {
         taskData = querySnapShot.docs.map((documentSnapShot) {

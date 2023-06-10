@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
+import 'package:todo/authentication/UserDmAuth.dart';
 import 'package:todo/widgets&model/provider/provider.dart';
+
+import '../widgets&model/tasks_data_class.dart';
 
 class NewTask extends StatefulWidget {
   @override
@@ -120,7 +123,10 @@ class _NewTaskState extends State<NewTask> {
   }
 
   void onAddPress() {
-    CollectionReference todo = FirebaseFirestore.instance.collection("todo");
+    CollectionReference todo = FirebaseFirestore.instance
+        .collection(UserDm.collectionName)
+        .doc(UserDm.currentUser!.id)
+        .collection(TaskData.collectionName);
     DocumentReference doc = todo.doc();
     doc.set({
       "id": doc.id,
